@@ -25,7 +25,7 @@
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "dateformat": "^3.0.3",
-    "jquery": "^2.2.4",
+    "jquery": "^3.5.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
