@@ -1,0 +1,133 @@
+<div></div><br>
+<div style="width:600px; margin-left:auto;
+margin-right:auto; background-color:yellow;">
+    <!doctype html>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>A simple, clean, and responsive HTML invoice template</title>
+
+    </head>
+
+    <body>
+        <div *ngFor =  "let invoice of invoiceData;let i = index">
+            <div class="invoice-box">
+                <table cellpadding="0" cellspacing="0">
+                    <tr class="top">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td class="title">
+                                        <img src="assets/images/orderInvoice.png"
+                                            style="width:100%; max-width:300px;">
+                                    </td>
+
+                                    <td>
+                                        Invoice #: {{invoice.invoice_number}}<br>
+                                        Created: {{invoice.order_id}}<br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr class="information">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td>
+                                            Shipping address<br>
+                                            Billing Address
+                                        
+                                    </td>
+
+                                    <td>
+                                             {{invoice.shipping_address}}<br>
+                                            {{invoice.billing_address}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr class="heading">
+                        <td>
+                            Payment Method
+                        </td>
+
+                        <td>
+                            COD
+                        </td>
+                    </tr>
+
+                    <tr class="details">
+                        <td>
+                            COD
+                        </td>
+
+                        <td>
+                            {{invoice.product_price}}
+                        </td>
+                    </tr>
+
+                    <tr class="heading">
+                        <td>
+                            {{invoice.product_name}}
+                        </td>
+
+                        <td>
+                            {{invoice.product_price}}
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td>
+                            Product Name
+                        </td>
+
+                        <td>
+                            {{invoice.product_name}}
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td>
+                            Product Quantity
+
+                        </td>
+
+                        <td>
+                            {{invoice.product_qty}}
+                        </td>
+                    </tr>
+
+                    <tr class="item last">
+                        <td>
+                            Discount
+                        </td>
+
+                        <td>
+                            {{invoice.discount}}
+                        </td>
+                    </tr>
+
+                    <tr class="total">
+                        <td></td>
+
+                        <td>
+                            Total: {{invoice.total_amt}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <a role="button" (click)="done()">Go to Dashboard
+                </a>
+            </div>
+        </div>
+
+    </body>
+
+    </html>
+</div>

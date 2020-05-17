@@ -1,0 +1,47 @@
+<div class="module form-module">
+  <div>
+
+  </div>
+
+  <div class="form">
+    <h2><b>Update Address</b></h2>
+
+    <form role="form" #updateAddressForm="ngForm" action="#" method="post">
+      Customer name
+      <input type="text" [(ngModel)]="address.name" #formName="ngModel" name="name" placeholder="name" required=" ">
+      
+      <input type="hidden" [(ngModel)]="address.user" #formName="ngModel" name="user" placeholder="type" required=" ">
+      <input type="hidden" [(ngModel)]="address.address_id" #formName="ngModel" name="address_id" placeholder="type" required=" ">
+     
+      Address
+      <input type="text" [(ngModel)]="address.address" #formName="ngModel" name="address" placeholder="address" required=" ">
+      
+      City
+      <input type="text" [(ngModel)]="address.city" #formName="ngModel" name="city" placeholder="city" required=" ">
+      
+      State
+      <input type="text" [(ngModel)]="address.state" #formName="ngModel" name="state" placeholder="state" required=" ">
+      
+      zip
+      <input type="text" [(ngModel)]="address.zip" #formName="ngModel" name="zip" placeholder="zip" required=" ">
+      
+      Landmark
+      <input type="text" [(ngModel)]="address.landmark" #formName="ngModel" name="landmark" placeholder="landmark" required=" ">
+      
+      Mobile
+      <input type="text" [(ngModel)]="address.mobile" #formName="ngModel" name="mobile" placeholder="mobile" required=" ">
+      
+      Email
+      <input type="text" [(ngModel)]="address.email" #formName="ngModel" name="email" placeholder="email" required=" ">
+      
+      Country
+      <input type="text" [(ngModel)]="address.country" #formName="ngModel" name="country" placeholder="country" required=" ">
+      
+      <b> </b>
+      <input type="submit" (click)="updateAddress(updateAddressForm.value)" value="update">
+    </form>
+  </div>
+
+  <!-- <div class="cta"><a href="#">Forgot your password?</a></div>
+      <br> -->
+</div>

@@ -1,0 +1,156 @@
+
+    <div class="w3l_banner_nav_right">
+        <!-- events -->
+            <div class="events">
+              <h3>FRUITS</h3>
+              <div class="agile_top_brands_grids">
+
+                <div *ngFor =  "let product of products;let i = index">
+                    <div class="col-md-3 top_brand_left">
+                        <div class="hover14 column" style="padding: 20px 0px;">
+    
+    
+                            <div class="agile_top_brand_left_grid" >
+                                <div class="agile_top_brand_left_grid_pos">
+                                        <div *ngIf="product.discount!=0.00">
+                                    <img src="assets/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                </div>
+                                <div class="agile_top_brand_left_grid1" >
+                                    <figure>
+                                        <form #form="ngForm" ngSubmit="onClick(form.value)">
+                                            <div class="snipcart-item block" >
+                                                <div class="snipcart-thumb" >
+                                                    
+                                                    <a (click)="singleProduct(product,i)">
+                                                        <img [src]="imageMapArray.get(product.id)" alt=" "
+                                                            class="img-responsive" title="" style="height:80px; width: 80px" /><br>
+    
+                                                    </a>
+                                                    <div style="text-align: center">
+                                                        <span><b> {{product.name}}</b></span>
+                                                        <span>
+                                                                <div *ngIf="product.discount!=0.00;else notShow">
+                                                            <h4>&#8377; {{product.price}}
+                                                                    <span>&#8377; {{product.price*1+product.discount*1}}</span>
+                                                            </h4>
+                                                        </div>
+                                                        <ng-template #notShow>
+                                                                <h4>&#8377; {{product.price}}
+                                                                        
+                                                                    </h4>
+                                                              </ng-template>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="snipcart-details top_brand_home_details">
+    
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="product.name" [(ngModel)]="product.name"
+                                                            value="dogs food" />
+                                                        <input type="hidden" name="product.price"
+                                                            [(ngModel)]="product.price" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <button (click)="addProduct(product)" title=" Add"
+                                                            class="button" style="background: #86C43F">Add Product</button>&nbsp;
+    
+                                                    </fieldset>
+    
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </figure>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="clearfix"> </div>
+            </div>
+           
+            
+            </div>
+        <!-- //events -->
+            </div>
+            <div class="clearfix"></div>
+
+
+
+<!-- 
+<div class="top-brands">
+    <div class="container">
+        <h3>Hot Offers</h3>
+        <div class="agile_top_brands_grids">
+
+            <div *ngFor =  "let product of products;let i = index">
+                <div class="col-md-3 top_brand_left">
+                    <div class="hover14 column" style="padding: 20px;">
+
+
+                        <div class="agile_top_brand_left_grid" >
+                            <div class="agile_top_brand_left_grid_pos">
+                                <img src="assets/images/offer.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="agile_top_brand_left_grid1" >
+                                <figure>
+                                    <form #form="ngForm" ngSubmit="onClick(form.value)">
+                                        <div class="snipcart-item block" >
+                                            <div class="snipcart-thumb" >
+                                                
+                                                <a (click)="singleProduct(product,i)">
+                                                    <img [src]="imageMapArray.get(product.id)" alt=" "
+                                                        class="img-responsive" style="height:80px; width: 80px" /><br>
+
+                                                </a>
+                                                <div style="text-align: center">
+                                                    <span><b> {{product.name}}</b></span>
+                                                    <span>
+                                                        <h4>{{product.price}}
+                                                            <span>Rs. {{product.price+0}}</span>
+                                                        </h4>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value=" " />
+                                                    <input type="hidden" name="product.name" [(ngModel)]="product.name"
+                                                        value="dogs food" />
+                                                    <input type="hidden" name="product.price"
+                                                        [(ngModel)]="product.price" />
+                                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                                    <input type="hidden" name="currency_code" value="USD" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <button (click)="addProduct(product)" title=" Add"
+                                                        class="button" style="background: #86C43F">Add Product</button>&nbsp;
+
+                                                </fieldset>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </figure>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div> -->

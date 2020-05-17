@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Grocery Store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Sign In &
+		Sign
+		Up :: w3layouts</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+</head>
+
+<body>
+	<script>
+		$(document).ready(function () {
+			var navoffeset = $(".agileits_header").offset().top;
+			$(window).scroll(function () {
+				var scrollpos = $(window).scrollTop();
+				if (scrollpos >= navoffeset) {
+					$(".agileits_header").addClass("fixed");
+				} else {
+					$(".agileits_header").removeClass("fixed");
+				}
+			});
+
+		});
+	</script>
+	<div class="banner">
+
+		<div class="w3l_banner_nav_right">
+			<div class="w3_login">
+				<h3>Sign In & Sign Up</h3>
+				<div class="w3_login_module">
+					<div *ngIf="signUpFlag!=true" class="module form-module">
+						<div class="toggle">
+							<a role="button" (click)="signUp()">
+								<i class="fa fa-times fa-pencil"></i>
+							</a>
+						</div>
+
+						<div class="form">
+							<h2>Login to your account</h2>
+
+							<form role="form" #loginForm="ngForm" action="#" method="post">
+								<input type="text" [(ngModel)]="id" #formName="ngModel" name="id" placeholder="id"
+									required=" ">
+								<input type="password" [(ngModel)]="password" #formName="ngModel" name="password"
+									placeholder="Password" required=" ">
+								<input type="submit" (click)="onLoggedin(loginForm.value)" value="Login">
+							</form>
+						</div>
+
+						<div class="cta"><a role="button" (click)="forgetPassword()">Forgot your password?</a></div>
+					</div>
+					<div *ngIf="signUpFlag" class="module form-module">
+						<div class="toggle">
+							<a role="button" (click)="login()">
+								<i class="fa fa-times fa-pencil"></i>
+							</a>
+						</div>
+
+						<div class="form">
+							<h2>Signup with your account</h2>
+
+							<form role="form" #signUp="ngForm" action="#" method="post">
+								<input type="text" [(ngModel)]="id" #formName="ngModel" name="id" placeholder="id"
+									required=" ">
+								<input type="text" [(ngModel)]="name" #formName="ngModel" name="name" placeholder="name"
+									required=" ">
+								<input type="text" [(ngModel)]="email" #formName="ngModel" name="email"
+									placeholder="email" required=" ">
+								<input type="text" [(ngModel)]="mobile" #formName="ngModel" name="mobile"
+									placeholder="mobile" required=" ">
+								<input type="text" [(ngModel)]="state" #formName="ngModel" name="state" placeholder="state"
+									required=" ">
+								<input type="text" [(ngModel)]="city" #formName="ngModel" name="city" placeholder="city"
+									required=" ">
+								<input type="text" [(ngModel)]="zip" #formName="ngModel" name="zip" placeholder="zip"
+									required=" ">
+								<input type="text" [(ngModel)]="country" #formName="ngModel" name="country" placeholder="country"
+									required=" ">
+								<input type="text" [(ngModel)]="landmark" #formName="ngModel" name="landmark" placeholder="landmark"
+									required=" ">
+								<input type="text" [(ngModel)]="address" #formName="ngModel" name="address" placeholder="address"
+									required=" ">
+								<input type="text" [(ngModel)]="addresstype" #formName="ngModel" name="addresstype" placeholder="address type"
+									required=" ">
+								<input type="submit" (click)="createAccount(signUp.value)" value="Login">
+							</form>
+						</div>
+
+						<div class="cta"><a role="button" (click)="forgetPassword()">Forgot your password?</a></div>
+					</div>
+
+				</div>
+				<script>
+					$('.toggle').click(function () {
+						$(this).children('i').toggleClass('fa-pencil');
+						$('.form').animate({
+							height: "toggle",
+							'padding-top': 'toggle',
+							'padding-bottom': 'toggle',
+							opacity: "toggle"
+						}, "slow");
+					});
+				</script>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".dropdown").hover(
+				function () {
+					$('.dropdown-menu', this).stop(true, true).slideDown("fast");
+					$(this).toggleClass('open');
+				},
+				function () {
+					$('.dropdown-menu', this).stop(true, true).slideUp("fast");
+					$(this).toggleClass('open');
+				}
+			);
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+		});
+	</script>
+	<script src="assets/js/minicart.js"></script>
+	<script>
+		paypal.minicart.render();
+
+		paypal.minicart.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+
+	</script>
+</body>
+
+</html> 

@@ -1,0 +1,449 @@
+<div>
+    <div *ngIf="payment==false">
+        <div class="w3l_banner_nav_right">
+            <div class="privacy about">
+                <h3>Check
+                    <span>out</span>
+
+                </h3>
+
+                <div class="checkout-right">
+                    <h4>Your shopping cart contains:
+                        <span>{{productsUnique.length}} Product</span>
+                    </h4>
+                    <div *ngIf="productsUnique.length>0">
+                        <table class="timetable_sub">
+                            <thead>
+                                <tr>
+                                    <th>SL No.</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor =  "let product of productsUnique;let i = index" class="rem1">
+                                    <td class="invert">{{i+1}}</td>
+                                    <td class="invert-image">
+                                        <!-- <a href="single.html">
+                                                    <img [src]="imageMapArray.get(product.id)" alt=" " class="img-responsive">
+                                                </a> -->
+                                        <a (click)="singleProduct(product,i)">
+                                            <img [src]="imageMapArray.get(product.id)" alt=" " class="img-responsive"
+                                                style="height:80px; width: 80px" /><br>
+
+                                        </a>
+                                    </td>
+                                    <td class="invert" style="text-align: center;">
+                                        <div class="quantity">
+                                            <div class="row" class="quantity-select">
+                                                <div class="col-md-2">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div>
+                                                        <a (click)="countProductMethod(product,0)"
+                                                            class="entry value-minus"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+
+                                                    <div class="entry value">
+                                                        <span>{{map.get(product.id)}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="entry value-plus active">
+                                                        <a (click)="countProductMethod(product,1)"
+                                                            class="entry value-plus"></a>
+                                                        &nbsp;</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="invert">{{product.name}}</td>
+
+                                    <td class="invert">&#8377; {{product.price}}</td>
+                                    <td>
+                                        <div class="rem">
+                                            <a (click)="deleteProduct(product)" class="close1"></a>&nbsp;</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="checkout-left">
+                    <div *ngIf="productsUnique.length>0">
+                        <div class="col-md-4 checkout-left-basket">
+                            <div *ngIf="loggedInTrue==false">
+                                <a routerLink="/login" routerLinkActive="active">
+                                    <h4>Continue to login</h4>
+                                </a>
+                            </div>
+
+                            <ul *ngFor =  "let product of productsUnique;let i = index">
+                                <li>Product{{i}}
+                                    <i>-</i>
+                                    <span>&#8377; {{product.price}} X{{map.get(product.id)}}</span>
+                                </li>
+                            </ul>
+                            <ul>
+
+                                <li><strong>Total Amount </strong>
+                                    <i>&nbsp;-</i>
+                                    <span>&#8377; {{sum}}</span>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div *ngIf="loggedInTrue" class="col-md-8 address_form_agile">
+                            <div *ngIf="SavedUser==false">
+                                <input type="radio" (change)="savedUserAddress($event)" />&nbsp;Saved Address
+                            </div>
+                            <div *ngIf="SavedUser">
+                                <b>Saved Address</b>
+                            </div>
+                            <div *ngIf="SavedUser"><br>
+                                <div>
+
+                                    <div class="row">
+                                        <div *ngFor =  "let address of addressList;let i = index">
+
+                                            <div class="col-sm-4" style="background-color:rgb(215, 215, 224);">
+
+                                                <input type="radio" (change)="setAddress($event,address)" />
+                                                <b>Address {{i+1}} </b><br>
+                                                Address : {{address.address}} <br>
+                                                city : {{address.city}} <br>
+                                                state : {{address.state}} <br>
+                                                zip : {{address.zip}} <br>
+                                                country : {{address.country}} <br>
+                                                &nbsp;
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <br>
+                                    <div>
+                                        <button [disabled]="!clicked" class="btn btn-primary"
+                                            title="Please Select any one address" (click)="paymentPage()">Delivery
+                                            to this
+                                            Address</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div *ngIf="createNewAddress==false">
+                                    <input type="radio" (change)="addNewAddress($event)" />&nbsp;Add a New Address
+                            </div>
+                            <div *ngIf="createNewAddress">
+                                <br>
+                                <b><strong>New Address</strong> </b>
+                                <br><br>
+                                <form name="form" [formGroup]="form" #checkoutForm="ngForm" (ngSubmit)="form.valid">
+                                    <div class="form-group">
+                                                <label for="landmark">Customer Name</label>
+                                                <input type="text" class="form-control" formControlName="name"
+                                                    [ngClass]="{'is-invalid':form.get('name').touched && form.get('name').invalid}" />
+                                                <div *ngIf="form.get('name').touched && form.get('name').invalid"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="form.get('name').errors.required">
+                                                        <font color="red">*Name is required</font>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                     <div class="form-group" style="display:inline-block">
+                                                    <label for="landmark">Mobile Number </label>
+                                                    <input type="text" class="form-control" formControlName="mobile"
+                                                        [ngClass]="{'is-invalid':form.get('mobile').touched && form.get('mobile').invalid}" />
+                                                    <div *ngIf="form.get('mobile').touched && form.get('mobile').invalid"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="form.get('mobile').errors.required">
+                                                            <font color="red">*Mobile is required</font>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <!-- <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            [ngClass]="{'is-invalid':form.get('name').touched && form.get('name').invalid}"
+                                            required />
+                                        <div class="invalid-feedback">
+                                            <div>
+                                                <font color="red">*name is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile Number</label>
+                                        <input type="text" class="form-control" formControlName="mobile"
+                                            [ngClass]="{'is-invalid':form.get('mobile').touched && form.get('mobile').invalid}"
+                                            required />
+                                        <div class="invalid-feedback">
+                                            <div>
+                                                <font color="red">*Mobile is required</font>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group" style="display:inline-block">
+                                        <label for="email">Email Address</label>
+                                        <input type="text" class="form-control" formControlName="email"
+                                            [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" />
+                                        <div *ngIf="form.get('email').touched && form.get('email').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('email').errors.required">
+                                                <font color="red">*Email Name is required</font>
+                                            </div>
+                                            <div *ngIf="form.get('email').errors.email">
+                                                <font color="red">*Email must be a valid email Address</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="landmark">Landmark</label>
+                                        <input type="text" class="form-control" formControlName="landmark"
+                                            [ngClass]="{'is-invalid':form.get('landmark').touched && form.get('landmark').invalid}" />
+                                        <div *ngIf="form.get('landmark').touched && form.get('landmark').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('landmark').errors.required">
+                                                <font color="red">*Landmark is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"  style="display:inline-block">
+                                        <label for="landmark">City</label>
+                                        <input type="text" class="form-control" formControlName="city"
+                                            [ngClass]="{'is-invalid':form.get('city').touched && form.get('city').invalid}" />
+                                        <div *ngIf="form.get('city').touched && form.get('city').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('city').errors.required">
+                                                <font color="red">*city is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="form-group" style="display:inline-block">
+                                        <label for="landmark">State</label>
+                                        <input type="text" class="form-control" formControlName="state"
+                                            [ngClass]="{'is-invalid':form.get('state').touched && form.get('state').invalid}" />
+                                        <div *ngIf="form.get('state').touched && form.get('state').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('state').errors.required">
+                                                <font color="red">*state is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display:inline-block">
+                                        <label for="landmark">Pincode</label>
+                                        <input type="text" class="form-control" formControlName="zip"
+                                            [ngClass]="{'is-invalid':form.get('zip').touched && form.get('zip').invalid}" />
+                                        <div *ngIf="form.get('zip').touched && form.get('zip').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('zip').errors.required">
+                                                <font color="red">*zip is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="form-group" style="display:inline-block">
+                                        <label for="landmark">Country</label>
+                                        <input type="text" class="form-control" formControlName="country"
+                                            [ngClass]="{'is-invalid':form.get('country').touched && form.get('country').invalid}" />
+                                        <div *ngIf="form.get('country').touched && form.get('country').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('country').errors.required">
+                                                <font color="red">*country is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="landmark">address</label>
+                                        <textarea class="form-control" formControlName="address"
+                                            [ngClass]="{'is-invalid':form.get('address').touched && form.get('address').invalid}"></textarea>
+                                        <div *ngIf="form.get('address').touched && form.get('address').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('address').errors.required">
+                                                <font color="red">*address is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_type">Address Type</label>
+                                        <input type="text" class="form-control" formControlName="address_type"
+                                            [ngClass]="{'is-invalid':form.get('address_type').touched && form.get('address_type').invalid}" />
+                                        <div *ngIf="form.get('address_type').touched && form.get('address_type').invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="form.get('address_type').errors.required">
+                                                <font color="red">*Address Type is required</font>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-primary"
+                                            title="Please fill all details so that you will able to gop to payment page"
+                                            (click)="checkout(checkoutForm.value)" [disabled]="!form.valid">Delivery
+                                            to this
+                                            Address</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div *ngIf="payment">
+        <!DOCTYPE html>
+        <html>
+
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+            <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+        </head>
+
+        <body>
+            <div class="logo_products">
+            </div>
+            <div class="banner">
+                <div class="w3l_banner_nav_left">
+                </div>
+                <div class="w3l_banner_nav_right">
+                    <div class="privacy about">
+                        <h3>Pay<span>ment</span></h3>
+                        <div class="checkout-right">
+                            <div id="parentHorizontalTab">
+                                <ul class="resp-tabs-list hor_1">
+                                    <li><i class="fa fa-money" aria-hidden="true"></i> Cash on delivery (COD)</li>
+                                </ul>
+                                <div class="checkout-right">
+                                    <h4>Your shopping cart contains:
+                                        <span>{{productsUnique.length}} Products</span>
+                                    </h4>
+
+                                    <div>
+                                        <table class="timetable_sub">
+                                            <thead>
+                                                <tr>
+                                                    <th>SL No.</th>
+                                                    <th>Product</th>
+                                                    <th>Quality</th>
+                                                    <th>Product Name</th>
+                                                    <th>Price</th>
+                                                    <th>Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor =  "let product of productsUnique;let i = index"
+                                                    class="rem1">
+                                                    <td class="invert">{{i+1}}</td>
+                                                    <td class="invert-image">
+                                                        <a (click)="singleProduct(product,i)">
+                                                            <img [src]="imageMapArray.get(product.id)" alt=" "
+                                                                class="img-responsive"
+                                                                style="height:80px; width: 80px" /><br>
+
+                                                        </a>
+                                                    </td>
+                                                    <td class="invert" style="text-align: center;">
+                                                        <div class="quantity">
+                                                            <div class="row" class="quantity-select">
+                                                                <div class="col-md-2">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div>
+                                                                        <a (click)="countProductMethod(product,0)"
+                                                                            class="entry value-minus"></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="entry value">
+                                                                        <span>{{map.get(product.id)}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="entry value-plus active">
+                                                                        <a (click)="countProductMethod(product,1)"
+                                                                            class="entry value-plus"></a>
+                                                                        &nbsp;</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="invert">{{product.name}}</td>
+
+                                                    <td class="invert">{{product.price}}</td>
+                                                    <td>
+                                                        <div class="rem">
+                                                            <a (click)="deleteProduct(product)"
+                                                                class="close1"></a>&nbsp;
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="checkout-left">
+                                    <div class="col-md-4 checkout-left-basket">
+                                        <div>
+                                            <button class="btn btn-primary" disabled="true"
+                                                title="Please fill all details so that you will able to gop to payment page"
+                                                (click)="checkout('user')">Delivery Address</button>
+                                        </div><br>
+                                        <div>
+
+                                        </div>
+                                        <div>
+                                            <b>User</b> <br>
+                                            Address : {{address.address}} <br>
+                                            city : {{address.city}} <br>
+                                            state : {{address.state}} <br>
+                                            zip : {{address.zip}} <br>
+                                            country : {{address.country}} <br>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 checkout-left-basket"></div>
+                                    <div class="col-md-4 checkout-left-basket">
+                                        <ul><strong>
+                                                <li style="float:right">Total
+                                                    <i>-</i>
+                                                    <span>{{sum}}</span>
+                                                </li>
+                                            </strong>
+                                            <div class="checkout-right-basket">
+                                                <a role="button" (click)="paymentDone()">Make a Payment
+                                                    <span class="glyphicon glyphicon-chevron-right"
+                                                        aria-hidden="true"></span>
+                                                </a>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </body>
+
+        </html>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+<!-- 
+<div class="top-brands">
+        <div class="container">
+            
+            <div class="agile_top_brands_grids">
+    
+                <div class="col-md-8 top_brand_left">
+                        <h4>{{product.name}}</h4><br>
+				
+                        <h4>Description :</h4><br>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+                            officia deserunt mollit anim id est laborum.Duis aute irure dolor in 
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                            pariatur.</p>
+                            <br>
+                            <div class="rating1">
+                                    <span class="starRating">
+                                        <input id="rating5" type="radio" name="rating" value="5">
+                                        <label for="rating5">5</label>
+                                        <input id="rating4" type="radio" name="rating" value="4">
+                                        <label for="rating4">4</label>
+                                        <input id="rating3" type="radio" name="rating" value="3" checked>
+                                        <label for="rating3">3</label>
+                                        <input id="rating2" type="radio" name="rating" value="2">
+                                        <label for="rating2">2</label>
+                                        <input id="rating1" type="radio" name="rating" value="1">
+                                        <label for="rating1">1</label>
+                                    </span>
+                                </div>
+                       
+                </div>
+                <div class="col-md-4 top_brand_left">
+                    <div class="hover14 column">
+    
+                        <div>
+                            <div class="agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img src="assets/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <form #form="ngForm" ngSubmit="onClick(form.value)">
+                                            <div class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+    
+                                                    <a (click)="singleProduct(product)">
+                                                        <img [src]="imageArray[0]" alt=" " class="img-responsive" />
+                                                    </a>
+                                                    {{product.name}}
+                                                    <h4>{{product.price}}
+                                                        <span>Rs. {{product.price+0}}</span>
+                                                    </h4>
+    
+                                                </div>
+                                                <div class="snipcart-details top_brand_home_details">
+    
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="product.name" [(ngModel)]="product.name" value="dogs food" />
+                                                        <input type="hidden" name="product.price" [(ngModel)]="product.price" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <button (click)="addProduct(product)" title=" Add" class="button" style="background: #86C43F">Add Product</button>&nbsp;
+    
+                                                    </fieldset>
+    
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </figure>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 top_brand_left">
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div> -->
+
+    	
+    <div class="banner">
+               
+            <div class="w3l_banner_nav_right">
+              
+                <div class="agileinfo_single">
+                    <h5>Product : {{product.name}}</h5>
+                    <div class="col-md-4 agileinfo_single_left">
+                            <a (click)="singleProduct(product)">
+                                    <img [src]="imageArray[0]" alt=" " class="img-responsive" />
+                            </a>
+                    </div>
+                    <div class="col-md-8 agileinfo_single_right">
+                        <div class="rating1">
+                            <span class="starRating">
+                                <input id="rating5" type="radio" name="rating" value="5">
+                                <label for="rating5">5</label>
+                                <input id="rating4" type="radio" name="rating" value="4">
+                                <label for="rating4">4</label>
+                                <input id="rating3" type="radio" name="rating" value="3" checked>
+                                <label for="rating3">3</label>
+                                <input id="rating2" type="radio" name="rating" value="2">
+                                <label for="rating2">2</label>
+                                <input id="rating1" type="radio" name="rating" value="1">
+                                <label for="rating1">1</label>
+                            </span>
+                        </div>
+                        <div class="w3agile_description">
+                            <h4>Description :</h4>
+                            <p>{{product.description}} Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+                                officia deserunt mollit anim id est laborum.Duis aute irure dolor in 
+                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                                pariatur.</p>
+                        </div>
+                        <div class="snipcart-item block">
+                            <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                                <h4>{{product.price}} <span>$0.00</span></h4>
+                            </div>
+                            <div class="snipcart-details agileinfo_single_right_details">
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <input type="hidden" name="cmd" value="_cart" />
+                                        <input type="hidden" name="add" value="1" />
+                                        <input type="hidden" name="business" value=" " />
+                                        <input type="hidden" name="item_name" value="pulao basmati rice" />
+                                        <input type="hidden" name="amount" value="21.00" />
+                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                        <input type="hidden" name="currency_code" value="USD" />
+                                        <input type="hidden" name="return" value=" " />
+                                        <input type="hidden" name="cancel_return" value=" " />
+                                        <button (click)="addProduct(product)" title=" Add" class="button" style="background: #86C43F">Add Product</button>&nbsp;
+                                        <!-- <input type="submit" name="submit" (click)="addProduct(product)" value="Add to cart" class="button" /> -->
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
